@@ -3,6 +3,7 @@ import 'package:woicon/form/form.dart';
 import 'package:woicon/login/login.dart';
 import 'package:woicon/work_order/work_order.dart';
 import 'package:woicon/work_order/check_location.dart';
+import 'package:woicon/work_order/marker_map.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,7 +23,8 @@ class MyApp extends StatelessWidget {
         '/second': (context) => WorkOrder(),
         '/work': (context) => WorkOrder(),
         '/location': (context) => DashboardScreen(),
-        '/form': (context) => FormWo()
+        '/form': (context) => FormWo(),
+        '/map_marker': (context) => marker_map()
       },
       debugShowCheckedModeBanner: false,
     );

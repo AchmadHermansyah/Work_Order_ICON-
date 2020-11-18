@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Login extends StatefulWidget {
   static const routeName = '/login';
@@ -11,6 +12,8 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   bool showpassword = true;
   final _key = new GlobalKey<FormState>();
+  // Create storage
+  final storage = new FlutterSecureStorage();
   String username, password;
 
   check() {
@@ -23,23 +26,38 @@ class _LoginState extends State<Login> {
 
   login() async {
     final response = await http.post(
-        "http://koneksiflutter.000webhostapp.com/login.php",
-        body: {"username": username, "password": password});
+        // "http://koneksiflutter.000webhostapp.com/login.php",
+        // body: {"username": username, "password": password});
+        "http://10.14.23.240:8081/workflow/oauth2/token",
+        body: {
+          "client_id": "YRXXHQOHNPBHIQLRQZNPBTFWCYZDXHBP",
+          "client_secret": "2582990185f8ab8810cbf99064831426",
+          "username": username,
+          "password": password,
+          "grant_type": "password",
+          "scope":"*"
+        });
     final data = jsonDecode(response.body);
-    int value = data['value'];
-    String pesan = data['message'];
+    String access_token= data['access_token'];
+    await storage.write(key: 'token', value: access_token);
+    // int value = data['value'];
+    // String pesan = data['message'];
     // String usernameAPI = data['username'];
     // String namaAPI = data['nama'];
     // String id = data['id'];
-    if (value == 1) {
-      Navigator.pushNamed(context, '/work');
-      print(pesan);
+    if (access_token != null) {
+      Navigator.pushNamed(context, '/map_marker');
+      String _token = await storage.read(key: 'token');
+      print('ini akses 1: $_token');
     } else {
+      print('ini akses 2: $access_token');
+      String error = data['error'];
+      String error_description = data['error_description'];
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
-          title: Text('LOGIN GAGAL'),
-          content: Text(pesan),
+          title: Text(error),
+          content: Text(error_description),
           actions: [
             FlatButton(
               child: Text('close'),
