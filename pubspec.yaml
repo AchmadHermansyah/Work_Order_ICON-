@@ -33,6 +33,9 @@ dependencies:
   google_maps_flutter: ^0.5.20+1
   flutter_spinkit: ^3.1.0
   slide_digital_clock: ^1.0.0
+  flutter_secure_storage: ^3.3.5
+  fluster: ^1.1.2
+  flutter_cache_manager: ^1.1.1
 
 dev_dependencies:
   flutter_test:

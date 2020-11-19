@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:slide_digital_clock/slide_digital_clock.dart';
+import 'package:fluster/fluster.dart';
 
 class DashboardScreen extends StatefulWidget {
   static const routeName = '/location';
