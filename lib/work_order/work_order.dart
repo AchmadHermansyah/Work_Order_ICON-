@@ -91,43 +91,54 @@ class _PageListState extends State<_PageList> {
   //     "http://10.14.23.240:8081/api/1.0/workflow/pmtable/2307531105f9fbd34e87cb8022682379/data?access_token=9e3c052b2e86d3da4bafb4b7f3e4116f06f6e471";
 
   Future<List<dynamic>> _fecthDataUsers() async {
-    String table_id = "2307531105f9fbd34e87cb8022682379";
+    // String table_id = "2307531105f9fbd34e87cb8022682379";
+    // String access_token = await storage.read(key: 'token');
+    // String apiUrl = "http://10.14.23.240:8081/api/1.0/workflow/pmtable/$table_id/data?access_token=$access_token";
+    String apiUrl = "http://10.14.23.240:8081/api/1.0/workflow/cases";
     String access_token = await storage.read(key: 'token');
-    String apiUrl =
-        "http://10.14.23.240:8081/api/1.0/workflow/pmtable/$table_id/data?access_token=$access_token";
+    Map<String, String> headers = {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "Authorization": "Bearer $access_token",
+    };
 
-    var result = await http.get(apiUrl);
-    return json.decode(result.body)['rows'];
+    // var result = await http.get(apiUrl);
+    var result = await http.get(apiUrl, headers: headers);
+    // return json.decode(result.body)['rows'];
+
+    return json.decode(result.body);
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey[300],
-      child: FutureBuilder<List<dynamic>>(
-        future: _fecthDataUsers(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData) {
-            return ListView.builder(
-                padding: EdgeInsets.all(10),
-                itemCount: snapshot.data.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    leading: CircleAvatar(
-                      radius: 30,
-                      // backgroundImage:
-                      //     NetworkImage(snapshot.data[index]['avatar']),
-                    ),
-                    title: Text(snapshot.data[index]['nm_lokasi'] +
-                        " " +
-                        snapshot.data[index]['kd_wilayah']),
-                    subtitle: Text(snapshot.data[index]['alamat']),
-                  );
-                });
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        },
+      child: Scrollbar(
+        child: FutureBuilder<List<dynamic>>(
+          future: _fecthDataUsers(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                  padding: EdgeInsets.all(10),
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ListTile(
+                      leading: CircleAvatar(
+                        radius: 30,
+                        // backgroundImage:
+                        //     NetworkImage(snapshot.data[index]['avatar']),
+                      ),
+                      title: Text(snapshot.data[index]['app_pro_title'] +
+                          " " +
+                          snapshot.data[index]['app_tas_title']),
+                      subtitle: Text(snapshot.data[index]['app_number']),
+                    );
+                  });
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          },
+        ),
       ),
     );
   }
