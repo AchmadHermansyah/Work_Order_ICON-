@@ -28,7 +28,7 @@ class MenuDrawer extends StatelessWidget {
           _drawerItem(
               icon: Icons.logout,
               text: 'Keluar',
-              onTap: () => print('Tap Tombol Keluar ')),
+              onTap: () => Navigator.pushReplacementNamed(context, '/')),
         ],
       ),
     );
