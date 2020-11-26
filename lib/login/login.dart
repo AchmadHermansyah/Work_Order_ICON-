@@ -35,10 +35,10 @@ class _LoginState extends State<Login> {
           "username": username,
           "password": password,
           "grant_type": "password",
-          "scope":"*"
+          "scope": "*"
         });
     final data = jsonDecode(response.body);
-    String access_token= data['access_token'];
+    String access_token = data['access_token'];
     await storage.write(key: 'token', value: access_token);
     // int value = data['value'];
     // String pesan = data['message'];
@@ -46,7 +46,7 @@ class _LoginState extends State<Login> {
     // String namaAPI = data['nama'];
     // String id = data['id'];
     if (access_token != null) {
-      Navigator.pushNamed(context, '/map_marker');
+      Navigator.pushNamed(context, '/work');
       String _token = await storage.read(key: 'token');
       print('ini akses 1: $_token');
     } else {
