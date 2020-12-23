@@ -8,6 +8,14 @@ class DashboardScreen extends StatefulWidget {
   static const routeName = '/location';
   @override
   _MapsHomeState createState() => _MapsHomeState();
+
+  // ambil data dari list work_order;
+  final String itemHolder;
+  DashboardScreen({Key key, @required this.itemHolder}) : super(key: key);
+
+  goBack(BuildContext context) {
+    Navigator.pop(context);
+  }
 }
 
 class _MapsHomeState extends State<DashboardScreen> {

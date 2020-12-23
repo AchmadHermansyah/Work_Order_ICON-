@@ -5,6 +5,8 @@ import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
+import 'check_location.dart';
+
 class WorkOrder extends StatefulWidget {
   static const routeName = '/work';
   @override
@@ -94,7 +96,9 @@ class _PageListState extends State<_PageList> {
     // String table_id = "2307531105f9fbd34e87cb8022682379";
     // String access_token = await storage.read(key: 'token');
     // String apiUrl = "http://10.14.23.240:8081/api/1.0/workflow/pmtable/$table_id/data?access_token=$access_token";
-    String apiUrl = "http://10.14.23.240:8081/api/1.0/workflow/cases";
+    // String apiUrl = "http://10.14.23.240:8081/api/1.0/workflow/cases";
+    String apiUrl =
+        "http://10.14.23.240:8081/api/1.0/workflow/cases/participated";
     String access_token = await storage.read(key: 'token');
     Map<String, String> headers = {
       "Content-Type": "application/json",
@@ -109,6 +113,13 @@ class _PageListState extends State<_PageList> {
     return json.decode(result.body);
   }
 
+  getItemAndNavigate(String item, BuildContext context) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => DashboardScreen(itemHolder: item)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -119,19 +130,58 @@ class _PageListState extends State<_PageList> {
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.hasData) {
               return ListView.builder(
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(5),
                   itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                      leading: CircleAvatar(
-                        radius: 30,
-                        // backgroundImage:
-                        //     NetworkImage(snapshot.data[index]['avatar']),
+                    return Card(
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          radius: 30,
+                          child: Text(snapshot.data[index]['app_number']),
+                          // backgroundImage:
+                          //     NetworkImage(snapshot.data[index]['avatar']),
+                        ),
+                        title: Text(snapshot.data[index]['app_pro_title']),
+                        // subtitle: Text(snapshot.data[index]['app_tas_title']),
+                        subtitle: Container(
+                            child: Row(children: [
+                          Column(
+                            children: [
+                              Text(snapshot.data[index]['app_tas_title']),
+                              Text(snapshot.data[index]['app_status']),
+                            ],
+                          )
+                        ])),
+                        // buat event ontap untuk navigasi ke screen baru
+                        onTap: () => {
+                          getItemAndNavigate(
+                              snapshot.data[index]['app_number'], context)
+                        },
+                        // trailing untuk popup list wo
+                        trailing: PopupMenuButton<String>(
+                          icon: Icon(Icons.keyboard_arrow_right),
+                          padding: EdgeInsets.zero,
+                          // onSelected: (value) => showInSnackBar(
+                          //   GalleryLocalizations.of(context)
+                          //       .demoMenuSelected(value),
+                          // ),
+                          itemBuilder: (context) => <PopupMenuItem<String>>[
+                            PopupMenuItem<String>(
+                              value: "Accept-" +
+                                  snapshot.data[index]['app_number'],
+                              child: Text("Accept"),
+                            ),
+                            PopupMenuItem<String>(
+                              value: "2",
+                              child: Text("Menu 2"),
+                            ),
+                            PopupMenuItem<String>(
+                              enabled: false,
+                              child: Text("Menu 3"),
+                            ),
+                          ],
+                        ),
                       ),
-                      title: Text(snapshot.data[index]['app_pro_title'] +
-                          " " +
-                          snapshot.data[index]['app_tas_title']),
-                      subtitle: Text(snapshot.data[index]['app_number']),
                     );
                   });
             } else {
