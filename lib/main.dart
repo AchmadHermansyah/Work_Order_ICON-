@@ -6,6 +6,11 @@ import 'package:woicon/work_order/work_order.dart';
 import 'package:woicon/work_order/check_location.dart';
 import 'package:woicon/work_order/marker_map.dart';
 import 'form/formInverter.dart';
+import 'form/formKabelFo.dart';
+import 'form/formListBaterai.dart';
+import 'form/formRectifier.dart';
+import 'form/formRouter.dart';
+import 'form/formSwitch.dart';
 import 'form/formVHF.dart';
 import 'form/formVHFtriwulan.dart';
 import 'form/formradio.dart';
@@ -41,6 +46,11 @@ class MyApp extends StatelessWidget {
         '/formups': (context) => FormUps(),
         '/formulsem': (context) => FormMulSem(),
         '/formradio': (context) => FormRadio(),
+        '/formKabelFo': (context) => FormKabelFo(),
+        '/formBaterai': (context) => FormListBaterai(),
+        '/formRectifier': (context) => FormListRectifier(),
+        '/formRouter': (context) => FormRouter(),
+        '/formSwitch': (context) => FormSwitch(),
       },
       debugShowCheckedModeBanner: false,
     );

@@ -50,6 +50,36 @@ class _ListFormState extends State<ListForm> {
               },
               child: Text("Form Multiplexer Semesteran"),
             ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/formKabelFo');
+              },
+              child: Text("Form Kabel Fo"),
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/formBaterai');
+              },
+              child: Text("Form List Baterai"),
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/formRectifier');
+              },
+              child: Text("Form Rectifier"),
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/formRouter');
+              },
+              child: Text("Form Router"),
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/formSwitch');
+              },
+              child: Text("Form Switch"),
+            ),
           ],
         )
         // SingleChildScrolRaisedButton(
