@@ -36,6 +36,7 @@ dependencies:
   flutter_secure_storage: ^3.3.5
   fluster: ^1.1.2
   flutter_cache_manager: ^1.1.1
+  image_picker: ^0.6.7+22
 
 dev_dependencies:
   flutter_test:

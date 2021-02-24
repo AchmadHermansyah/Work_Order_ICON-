@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:woicon/form/form.dart';
+import 'package:woicon/listMenu/menuList.dart';
 import 'package:woicon/login/login.dart';
 import 'package:woicon/work_order/work_order.dart';
 import 'package:woicon/work_order/check_location.dart';
 import 'package:woicon/work_order/marker_map.dart';
+import 'form/formInverter.dart';
+import 'form/formVHF.dart';
+import 'form/formVHFtriwulan.dart';
+import 'form/formradio.dart';
+import 'form/formultiplexer.dart';
+import 'form/formups.dart';
 
 void main() {
   runApp(MyApp());
@@ -22,9 +29,18 @@ class MyApp extends StatelessWidget {
         // When navigating to the "/second" route, build the SecondScreen widget.
         '/second': (context) => WorkOrder(),
         '/work': (context) => WorkOrder(),
-        '/location': (context) => DashboardScreen(),
+        '/location': (context) => DashboardScreen(
+              itemHolder: null,
+            ),
         '/form': (context) => FormWo(),
-        '/map_marker': (context) => marker_map()
+        '/map_marker': (context) => marker_map(),
+        '/listform': (context) => ListForm(),
+        '/forminverter': (context) => FormInverter(),
+        '/formVHFtriwulan': (context) => FormVHPtriwulan(),
+        '/formVHF': (context) => FormVHFBulanan(),
+        '/formups': (context) => FormUps(),
+        '/formulsem': (context) => FormMulSem(),
+        '/formradio': (context) => FormRadio(),
       },
       debugShowCheckedModeBanner: false,
     );
