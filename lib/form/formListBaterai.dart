@@ -109,21 +109,14 @@ class _FormListBateraiState extends State<FormListBaterai> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Formulir Check List Baterai'),
+        backgroundColor: Colors.grey[600],
+      ),
       body: SingleChildScrollView(
         child: Form(
           child: Column(
             children: [
-              Container(
-                //container MAIN TITLE label Formulir Check List Baterai..
-                alignment: Alignment.centerLeft,
-                height: 30,
-                margin: EdgeInsets.fromLTRB(10, 50, 10, 0),
-                color: Colors.black87,
-                child: Text(
-                  "   Formulir Check List Baterai (Bulanan)",
-                  style: TextStyle(fontSize: 20.0, color: Colors.white),
-                ),
-              ),
               Container(
                 //container unit,lokasi,equipment,merk,type,tanggal,kondisis lingkungan
                 //color: Colors.amber,

@@ -80,6 +80,12 @@ class _ListFormState extends State<ListForm> {
               },
               child: Text("Form Switch"),
             ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/form');
+              },
+              child: Text("Form HORIZONTAL"),
+            ),
           ],
         )
         // SingleChildScrolRaisedButton(
