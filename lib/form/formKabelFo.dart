@@ -16,6 +16,7 @@ class _FormKabelFoState extends State {
   String r1 = "",
       r2 = "",
       r3 = "",
+      status = "",
       txtradio1 = "",
       txtradio2 = "",
       txtradio3 = "",
@@ -315,33 +316,59 @@ class _FormKabelFoState extends State {
                     //BATAS FORM
 
                     Container(
-                      child: Row(
+                      child: Column(
                         children: [
-                          Expanded(
-                            child: Container(
-                              //container label kondisi sambungan antar  battery
-                              alignment: Alignment.centerLeft,
-                              margin: EdgeInsets.fromLTRB(10, 20, 10, 0),
-                              child: Text(
-                                "Foto Inspeksi",
-                                style: TextStyle(fontSize: 15.0),
-                                maxLines: 3,
-                              ),
+                          Container(
+                            // unit
+                            alignment: Alignment.centerLeft,
+                            margin: EdgeInsets.fromLTRB(10, 20, 10, 5),
+                            child: Text(
+                              "Foto Inspeksi",
+                              style: TextStyle(
+                                  fontSize: 15.0, fontWeight: FontWeight.bold),
                             ),
                           ),
-                          Expanded(
-                            flex: 4,
-                            child: Container(
-                              margin: EdgeInsets.only(top: 20),
-                              child: ButtonTheme(
-                                minWidth: 285.0,
-                                child: new RaisedButton(
+                          Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: <Widget>[
+                                OutlineButton(
                                   onPressed: null,
-                                  child: new Text("Choose File"),
+                                  child: Text('Choose File'),
                                 ),
-                              ),
+                                SizedBox(
+                                  height: 20.0,
+                                ),
+                                Container(
+                                  child: null,
+                                  width: 20,
+                                  height: 700,
+                                ),
+                                SizedBox(
+                                  height: 20.0,
+                                ),
+                                // OutlineButton(
+                                //   onPressed: startUpload,
+                                //   child: Text('Upload Image'),
+                                // ),
+                                SizedBox(
+                                  height: 20.0,
+                                ),
+                                Text(
+                                  status,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.green,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 20.0,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 20.0,
+                                ),
+                              ],
                             ),
-                          ),
+                          )
                         ],
                       ),
                     ),
