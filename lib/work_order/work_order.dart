@@ -32,12 +32,12 @@ class _WorkOrderState extends State<WorkOrder> {
             bottom: TabBar(
               tabs: <Widget>[
                 Tab(
-                  icon: Icon(Icons.assignment_outlined),
-                  text: "On Going",
+                  // icon: Icon(Icons.assignment_outlined),
+                  text: "Pelaksanaan",
                 ),
                 Tab(
-                  icon: Icon(Icons.assignment_turned_in_outlined),
-                  text: "Done",
+                  // icon: Icon(Icons.assignment_turned_in_outlined),
+                  text: "Selesai",
                 ),
               ],
             ),
@@ -47,6 +47,7 @@ class _WorkOrderState extends State<WorkOrder> {
             children: [
               _PageList(),
               // Icon(Icons.directions_transit),
+              // _PageList(),
               RaisedButton(
                 child: Text(
                   "Entri",
@@ -54,7 +55,6 @@ class _WorkOrderState extends State<WorkOrder> {
                 ),
                 color: Colors.blue,
                 onPressed: () {
-                  // if (_formKey.currentState.validate()) {}
                   Navigator.pushNamed(context, '/location');
                 },
               ),
@@ -143,15 +143,34 @@ class _PageListState extends State<_PageList> {
                         ),
                         title: Text(snapshot.data[index]['app_pro_title']),
                         // subtitle: Text(snapshot.data[index]['app_tas_title']),
-                        subtitle: Container(
-                            child: Row(children: [
-                          Column(
-                            children: [
-                              Text(snapshot.data[index]['app_tas_title']),
-                              Text(snapshot.data[index]['app_status']),
-                            ],
-                          )
-                        ])),
+                        subtitle: Column(
+                          children: <Widget>[
+                            // Text(snapshot.data[index]['app_tas_title']),
+                            Align(
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                    snapshot.data[index]['app_tas_title'])),
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Container(
+                                color: Colors.lightBlueAccent,
+                                child: Text("Status : " +
+                                    snapshot.data[index]['app_status']),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        // subtitle: Container(
+                        //     child: Row(children: [
+                        //   Column(
+                        //     children: [
+                        //       Text(snapshot.data[index]['app_tas_title']),
+                        //       Text(snapshot.data[index]['app_status']),
+                        //     ],
+                        //   )
+                        // ])),
+
                         // buat event ontap untuk navigasi ke screen baru
                         onTap: () => {
                           getItemAndNavigate(
@@ -173,7 +192,7 @@ class _PageListState extends State<_PageList> {
                             ),
                             PopupMenuItem<String>(
                               value: "2",
-                              child: Text("Menu 2"),
+                              child: Text("Detail"),
                             ),
                             PopupMenuItem<String>(
                               enabled: false,
