@@ -3,6 +3,9 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:woicon/model/model_invert.dart';
+import 'package:intl/intl.dart';
 
 class FormInverter extends StatefulWidget {
   static const routeName = '/forminverter';
@@ -11,6 +14,7 @@ class FormInverter extends StatefulWidget {
 }
 
 class _FormInverterState extends State<FormInverter> {
+  final storage = new FlutterSecureStorage();
   String unit = "Unit 1";
   String equip = "Equipment 1";
   String failure = "Failure 1";
@@ -23,7 +27,9 @@ class _FormInverterState extends State<FormInverter> {
       txtradio1 = "",
       txtradio2 = "",
       txtradio3 = "",
-      txtradio4 = "";
+      txtradio4 = "",
+      now = DateFormat("dd-MM-yyyy HH:mm:ss").format(DateTime.now()),
+      datenow = "";
 
   void click() {
     setState(() {
@@ -65,6 +71,43 @@ class _FormInverterState extends State<FormInverter> {
       }
       print(r2);
     });
+  }
+
+  insert() async {
+    String url = "http://10.14.23.240:8081/api/1.0/workflow/pmtable";
+    String tableId = "6205777996037532bc8fbe9062892813";
+    String accessToken = await storage.read(key: 'token');
+    final response =
+        await http.post("$url/$tableId/data?access_token=$accessToken", body: {
+      "unit": "TEST123",
+      "lokasi": "GI TEST123",
+      "equipment": "TEST123",
+      "merk": "Panasonic",
+      "tipe": "AC",
+      "tanggal_dan_jam": datenow = now,
+      "inverter_modul": "Aktif",
+      "baypas_modul": "Aktif",
+    });
+    if (response.statusCode == 201) {
+      final String responseString = response.body;
+
+      return modelInvertFromJson(responseString);
+    } else {
+      return null;
+    }
+
+    //final data = json.decode(response.body);
+
+    //if (response.statusCode == 201) {
+    //return data;
+    //} else {
+    // throw Exception('GAGAL INSERT !');
+    //}
+    // int value = data['value'];
+    // String pesan = data['message'];
+    // String usernameAPI = data['username'];
+    // String namaAPI = data['nama'];
+    // String id = data['id'];
   }
 
   @override
@@ -606,6 +649,20 @@ class _FormInverterState extends State<FormInverter> {
                                 ),
                                 SizedBox(
                                   height: 20.0,
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 0),
+                                  child: ButtonTheme(
+                                    minWidth: 100.0,
+                                    child: new RaisedButton(
+                                      onPressed: () {
+                                        insert();
+                                        Navigator.pushNamed(
+                                            context, '/listform');
+                                      },
+                                      child: new Text("POST"),
+                                    ),
+                                  ),
                                 ),
                               ],
                             ),
