@@ -7,6 +7,11 @@ class FormVHFBulanan extends StatefulWidget {
 }
 
 class _FormVHFBulananState extends State<FormVHFBulanan> {
+  String terminal = 'Normal';
+  String fisik = 'Normal';
+  String level = 'Normal';
+  String kebersihan = 'Normal';
+  bool _checked = false;
   String unit = "Unit 1";
   String equip = "Equipment 1";
   String r1 = "",
@@ -406,6 +411,198 @@ class _FormVHFBulananState extends State<FormVHFBulanan> {
                             "Kondisi Prangkat (Device Condition)",
                             style:
                                 TextStyle(fontSize: 15.0, color: Colors.white),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(vertical: 20.0),
+                          height: 70.0,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: <Widget>[
+                              Column(
+                                children: [
+                                  Text('No'),
+                                  Container(
+                                    width: 100,
+                                    height: 50,
+                                    child: TextField(
+                                        decoration: InputDecoration(
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5)))),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text("Terminal Kondisi"),
+                                  Container(
+                                    width: 100,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(width: 1),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: DropdownButton(
+                                      isExpanded: true,
+                                      value: terminal,
+                                      onChanged: (String newValue) {
+                                        setState(() {
+                                          terminal = newValue;
+                                        });
+                                      },
+                                      items: <String>[
+                                        'Normal',
+                                        'Korosi',
+                                        'Lepas/Rusak'
+                                      ].map<DropdownMenuItem<String>>(
+                                          (String value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Text(value),
+                                        );
+                                      }).toList(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text('Pada Bagian'),
+                                  Container(
+                                    width: 100,
+                                    height: 50,
+                                    child: TextField(
+                                        decoration: InputDecoration(
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5)))),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text('Fisik Container'),
+                                  Container(
+                                    width: 100,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(width: 1),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Flexible(
+                                        child: DropdownButton(
+                                      hint: Text("Select"),
+                                      isExpanded: true,
+                                      value: fisik,
+                                      onChanged: (String newValue) {
+                                        setState(() {
+                                          fisik = newValue;
+                                        });
+                                      },
+                                      items: <String>[
+                                        'Normal',
+                                        'Tidak Normal',
+                                        'Bocor'
+                                      ].map<DropdownMenuItem<String>>(
+                                          (String value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Text(value),
+                                        );
+                                      }).toList(),
+                                    )),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text('Tegangan'),
+                                  Container(
+                                    width: 100,
+                                    height: 50,
+                                    child: TextField(
+                                        decoration: InputDecoration(
+                                            border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(5)))),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text('Level'),
+                                  Container(
+                                    width: 100,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(width: 1),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Flexible(
+                                        child: DropdownButton(
+                                      isExpanded: true,
+                                      value: level,
+                                      onChanged: (String newValue) {
+                                        setState(() {
+                                          level = newValue;
+                                        });
+                                      },
+                                      items: <String>['Normal', 'Tidak Normal']
+                                          .map<DropdownMenuItem<String>>(
+                                              (String value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Text(value),
+                                        );
+                                      }).toList(),
+                                    )),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text('Tambah El..'),
+                                  Checkbox(
+                                    value: _checked,
+                                    onChanged: (value) {
+                                      _checked = !_checked;
+                                      setState(() {});
+                                    },
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text('Kebersihan'),
+                                  Container(
+                                    width: 100,
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                        border: Border.all(width: 1),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Flexible(
+                                        child: DropdownButton(
+                                      isExpanded: true,
+                                      value: kebersihan,
+                                      onChanged: (String newValue) {
+                                        setState(() {
+                                          kebersihan = newValue;
+                                        });
+                                      },
+                                      items: <String>['Normal', 'Kotor']
+                                          .map<DropdownMenuItem<String>>(
+                                              (String value) {
+                                        return DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Text(value),
+                                        );
+                                      }).toList(),
+                                    )),
+                                  ),
+                                ],
+                              )
+                            ],
                           ),
                         ),
                       ],

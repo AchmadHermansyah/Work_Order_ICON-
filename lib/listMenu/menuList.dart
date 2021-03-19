@@ -82,9 +82,9 @@ class _ListFormState extends State<ListForm> {
             ),
             RaisedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/form');
+                Navigator.pushNamed(context, '/formulbul');
               },
-              child: Text("Form HORIZONTAL"),
+              child: Text("Form Multiplexer Bulanan"),
             ),
           ],
         )

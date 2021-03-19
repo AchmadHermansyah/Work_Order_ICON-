@@ -16,6 +16,7 @@ import 'form/formVHFtriwulan.dart';
 import 'form/formradio.dart';
 import 'form/formultiplexer.dart';
 import 'form/formups.dart';
+import 'form/formultiplexerbul.dart';
 
 void main() {
   runApp(MyApp());
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
         '/formRectifier': (context) => FormListRectifier(),
         '/formRouter': (context) => FormRouter(),
         '/formSwitch': (context) => FormSwitch(),
+        '/formulbul': (context) => FormMulBul()
       },
       debugShowCheckedModeBanner: false,
     );

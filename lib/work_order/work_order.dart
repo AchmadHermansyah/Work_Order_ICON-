@@ -55,7 +55,7 @@ class _WorkOrderState extends State<WorkOrder> {
                 ),
                 color: Colors.blue,
                 onPressed: () {
-                  Navigator.pushNamed(context, '/location');
+                  Navigator.pushNamed(context, '/listform');
                 },
               ),
             ],
@@ -134,74 +134,73 @@ class _PageListState extends State<_PageList> {
                   itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Card(
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          radius: 30,
-                          child: Text(snapshot.data[index]['app_number']),
-                          // backgroundImage:
-                          //     NetworkImage(snapshot.data[index]['avatar']),
-                        ),
-                        title: Text(snapshot.data[index]['app_pro_title']),
-                        // subtitle: Text(snapshot.data[index]['app_tas_title']),
-                        subtitle: Column(
-                          children: <Widget>[
-                            // Text(snapshot.data[index]['app_tas_title']),
-                            Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                    snapshot.data[index]['app_tas_title'])),
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Container(
-                                color: Colors.lightBlueAccent,
-                                child: Text("Status : " +
-                                    snapshot.data[index]['app_status']),
-                              ),
+                        child: ListTile(
+                            leading: CircleAvatar(
+                              radius: 30,
+                              child: Text(snapshot.data[index]['app_number']),
+                              // backgroundImage:
+                              //     NetworkImage(snapshot.data[index]['avatar']),
                             ),
-                          ],
-                        ),
+                            title: Text(snapshot.data[index]['app_pro_title']),
+                            // subtitle: Text(snapshot.data[index]['app_tas_title']),
+                            subtitle: Column(
+                              children: <Widget>[
+                                // Text(snapshot.data[index]['app_tas_title']),
+                                Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                        snapshot.data[index]['app_tas_title'])),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Container(
+                                    color: Colors.lightBlueAccent,
+                                    child: Text("Status : " +
+                                        snapshot.data[index]['app_status']),
+                                  ),
+                                ),
+                              ],
+                            ),
 
-                        // subtitle: Container(
-                        //     child: Row(children: [
-                        //   Column(
-                        //     children: [
-                        //       Text(snapshot.data[index]['app_tas_title']),
-                        //       Text(snapshot.data[index]['app_status']),
-                        //     ],
-                        //   )
-                        // ])),
+                            // subtitle: Container(
+                            //     child: Row(children: [
+                            //   Column(
+                            //     children: [
+                            //       Text(snapshot.data[index]['app_tas_title']),
+                            //       Text(snapshot.data[index]['app_status']),
+                            //     ],
+                            //   )
+                            // ])),
 
-                        // buat event ontap untuk navigasi ke screen baru
-                        onTap: () => {
-                          getItemAndNavigate(
-                              snapshot.data[index]['app_number'], context)
-                        },
-                        // trailing untuk popup list wo
-                        trailing: PopupMenuButton<String>(
-                          icon: Icon(Icons.keyboard_arrow_right),
-                          padding: EdgeInsets.zero,
-                          // onSelected: (value) => showInSnackBar(
-                          //   GalleryLocalizations.of(context)
-                          //       .demoMenuSelected(value),
-                          // ),
-                          itemBuilder: (context) => <PopupMenuItem<String>>[
-                            PopupMenuItem<String>(
-                              value: "Accept-" +
-                                  snapshot.data[index]['app_number'],
-                              child: Text("Accept"),
-                            ),
-                            PopupMenuItem<String>(
-                              value: "2",
-                              child: Text("Detail"),
-                            ),
-                            PopupMenuItem<String>(
-                              enabled: false,
-                              child: Text("Menu 3"),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
+                            // buat event ontap untuk navigasi ke screen baru
+                            onTap: () => {
+                                  getItemAndNavigate(
+                                      snapshot.data[index]['app_number'],
+                                      context)
+                                },
+                            // trailing untuk popup list wo
+                            trailing: PopupMenuButton<String>(
+                                icon: Icon(Icons.keyboard_arrow_right),
+                                padding: EdgeInsets.zero,
+                                // onSelected: (value) => showInSnackBar(
+                                //   GalleryLocalizations.of(context)
+                                //       .demoMenuSelected(value),
+                                // ),
+                                itemBuilder: (context) =>
+                                    <PopupMenuItem<String>>[
+                                      PopupMenuItem<String>(
+                                        value: "Accept-" +
+                                            snapshot.data[index]['app_number'],
+                                        child: Text("Accept"),
+                                      ),
+                                      PopupMenuItem<String>(
+                                        value: "2",
+                                        child: Text("Detail"),
+                                      ),
+                                      PopupMenuItem<String>(
+                                        enabled: false,
+                                        child: Text("Menu 3"),
+                                      ),
+                                    ])));
                   });
             } else {
               return Center(child: CircularProgressIndicator());
